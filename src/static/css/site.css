@@ -1,0 +1,23 @@
+@font-face {
+    font-family: "Athiti";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("../fonts/Athiti-ExtraLight.ttf") format("truetype");
+}
+
+.brandname {
+    font-family: "Athiti", monospace;
+}
+
+.mainPageContent {
+    margin-left: 15rem;
+}
+
+.mainPageContentContainer {
+    margin-top: 1rem;
+}
+
+.kadiSidebarNav {
+    width: 15rem !important;
+}
