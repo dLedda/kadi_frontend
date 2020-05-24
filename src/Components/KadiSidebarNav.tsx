@@ -1,7 +1,7 @@
-import {Header, HeaderContent, Icon, Image, Menu, Segment, Sidebar, SidebarPusher} from "semantic-ui-react";
+import {Header, HeaderContent, Icon, Image, Menu} from "semantic-ui-react";
 import logo from "../static/images/kadi.png";
 import React from "react";
-import LocaleContext from "../Contexts/LocaleContext";
+import UserContext from "../Contexts/UserContext";
 import {Link} from "react-router-dom";
 import {PageId} from "../enums";
 import {SERVER_BASE_NAME} from "../index";
@@ -11,7 +11,7 @@ interface KadiSidebarNavProps {
 }
 
 const KadiSidebarNav: React.FunctionComponent<KadiSidebarNavProps> = (props) => {
-    const Locale = React.useContext(LocaleContext).strings;
+    const Locale = React.useContext(UserContext).strings;
     const {activeItem} = props;
     return (
         <Menu
@@ -40,7 +40,7 @@ const KadiSidebarNav: React.FunctionComponent<KadiSidebarNavProps> = (props) => 
                 <Icon name={"game"} />
                 {Locale.menu.playTab}
             </Menu.Item>
-            <Link to={"/" + PageId.profile}>
+            <Link to={PageId.profile}>
                 <Menu.Item
                     as={"a"}
                     icon={true}
@@ -50,7 +50,7 @@ const KadiSidebarNav: React.FunctionComponent<KadiSidebarNavProps> = (props) => 
                     {Locale.menu.profileTab}
                 </Menu.Item>
             </Link>
-            <Link to={"/" + PageId.stats}>
+            <Link to={PageId.stats}>
                 <Menu.Item
                     as={"a"}
                     icon={true}
@@ -60,7 +60,7 @@ const KadiSidebarNav: React.FunctionComponent<KadiSidebarNavProps> = (props) => 
                     {Locale.menu.statsTab}
                 </Menu.Item>
             </Link>
-            <Link to={"/" + PageId.rulesets}>
+            <Link to={PageId.rulesets}>
                 <Menu.Item
                     as={"a"}
                     icon={true}
@@ -70,7 +70,7 @@ const KadiSidebarNav: React.FunctionComponent<KadiSidebarNavProps> = (props) => 
                     {Locale.menu.rulesetsTab}
                 </Menu.Item>
             </Link>
-            <Link to={"/" + PageId.friends}>
+            <Link to={PageId.friends}>
                 <Menu.Item
                     as={"a"}
                     icon={true}
@@ -80,7 +80,7 @@ const KadiSidebarNav: React.FunctionComponent<KadiSidebarNavProps> = (props) => 
                     {Locale.menu.friendsTab}
                 </Menu.Item>
             </Link>
-            <Link to={"/" + PageId.history}>
+            <Link to={PageId.history}>
                 <Menu.Item
                     as={"a"}
                     icon={true}

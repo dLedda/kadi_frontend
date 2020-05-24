@@ -1,6 +1,6 @@
 import React, {ReactElement} from "react";
-import KadiPage from "../Components/KadiPage";
 import {Header} from "semantic-ui-react";
+import UserContext from "../Contexts/UserContext";
 
 interface FriendsPageProps {}
 
@@ -16,12 +16,14 @@ class FriendsPage extends React.Component<FriendsPageProps, FriendsPageState> {
     }
 
     render(): ReactElement {
+        const Locale = this.context.strings;
         return (
             <Header>
-                My Friends
+                {Locale.friendsPage.title}
             </Header>
         );
     }
 }
+FriendsPage.contextType = UserContext;
 
 export default FriendsPage;

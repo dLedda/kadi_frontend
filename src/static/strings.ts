@@ -39,6 +39,24 @@ export const IntlStrings = {
             logoutButton: "Logout",
             userWelcome: "Hi, ",
         },
+        homePage: {
+            title: "Home",
+        },
+        profilePage: {
+            title: "Profile",
+        },
+        statsPage: {
+            title: "Stats",
+        },
+        rulesetsPage: {
+            title: "Rulesets",
+        },
+        friendsPage: {
+            title: "Friends",
+        },
+        historyPage: {
+            title: "History",
+        },
     },
     de: {
         menu: {
@@ -52,6 +70,24 @@ export const IntlStrings = {
             logoutButton: "Abmelden",
             userWelcome: "Hallo, ",
         },
+        homePage: {
+            title: "Startseite",
+        },
+        profilePage: {
+            title: "Profil",
+        },
+        statsPage: {
+            title: "Statistiken",
+        },
+        rulesetsPage: {
+            title: "Regelwerke",
+        },
+        friendsPage: {
+            title: "Freunde",
+        },
+        historyPage: {
+            title: "Spielverlauf",
+        },
     },
     it: {
         menu: {
@@ -64,6 +100,24 @@ export const IntlStrings = {
             loginButton: "Accedi",
             logoutButton: "Esci",
             userWelcome: "Ciao, ",
+        },
+        homePage: {
+            title: "Home",
+        },
+        profilePage: {
+            title: "Profilo",
+        },
+        statsPage: {
+            title: "Statistiche",
+        },
+        rulesetsPage: {
+            title: "Regolamenti",
+        },
+        friendsPage: {
+            title: "Amici",
+        },
+        historyPage: {
+            title: "Storia",
         },
     },
 } as const;

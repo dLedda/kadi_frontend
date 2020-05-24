@@ -38,7 +38,7 @@ module.exports = {
   resolve: { extensions: [".tsx", ".ts", ".js", "*"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
-    publicPath: "/kadi/static/",
+    publicPath: "/kadi/static/frontend/",
     filename: "bundle.js"
   },
   devServer: {

@@ -7,7 +7,7 @@
   "author": "Daniel Ledda",
   "scripts": {
     "build": "webpack --mode development",
-    "postbuild": "rsync -avu --delete dist/ ../kadi_backend/dist/frontend/static",
+    "postbuild": "rsync -avu --delete dist/ ../kadi_backend/static/frontend",
     "start": "webpack-dev-server --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

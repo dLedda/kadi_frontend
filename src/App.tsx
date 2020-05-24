@@ -9,18 +9,16 @@ import HomePage from "./Components/HomePage";
 import {SERVER_BASE_NAME} from "./index";
 import axios from "axios";
 import UserContext, {IUserContext} from "./Contexts/UserContext";
-import LocaleContext, {ILocaleContext} from "./Contexts/LocaleContext";
 
 interface AppState {
     userContext: IUserContext;
-    localeContext: ILocaleContext;
 }
 
 interface AppProps {}
 
 class App extends React.Component<AppProps, AppState> {
     private readonly updateUserContext: (username: string, loggedIn: boolean) => void;
-    private readonly changeLang: (lang: SupportedLang) => void;
+    private readonly changeLang: (lang: SupportedLang, submit?: boolean) => void;
     constructor(props: AppProps) {
         super(props);
 
@@ -28,16 +26,25 @@ class App extends React.Component<AppProps, AppState> {
             this.setState({userContext: {
                 username: username,
                 loggedIn: loggedIn,
-                updateUserContext: this.updateUserContext
+                updateUserContext: this.updateUserContext,
+                currentLang: this.state.userContext.currentLang,
+                strings: this.state.userContext.strings,
+                changeLang: this.state.userContext.changeLang,
             }});
         };
 
-        this.changeLang = (lang: SupportedLang) => {
-            this.setState({localeContext: {
+        this.changeLang = (lang: SupportedLang, submit=true) => {
+            this.setState({userContext: {
                 strings: IntlStrings[lang],
                 currentLang: lang,
-                changeLang: this.changeLang
+                changeLang: this.changeLang,
+                username: this.state.userContext.username,
+                loggedIn: this.state.userContext.loggedIn,
+                updateUserContext: this.state.userContext.updateUserContext,
             }});
+            if (submit) {
+                this.submitLanguagePreference(lang);
+            }
         };
 
         this.state = {
@@ -45,32 +52,40 @@ class App extends React.Component<AppProps, AppState> {
                 username: "",
                 loggedIn: false,
                 updateUserContext: this.updateUserContext,
-            },
-            localeContext: {
                 currentLang: SupportedLang.gb,
                 strings: IntlStrings[SupportedLang.gb],
                 changeLang: this.changeLang,
             }
         };
+    }
 
+    componentDidMount(): void {
+        this.getDefaultVals();
+    }
+
+    getDefaultVals(): void {
         axios.get("/api/user", {baseURL: SERVER_BASE_NAME})
             .then((res) => {
                 const data = res.data as any;
                 if (data.loggedIn) {
-                    this.updateUserContext(data.username, true);
-                }
-                else {
-                    this.updateUserContext("", false);
+                    this.updateUserContext(data.username, data.loggedIn);
+                    this.changeLang(data.lang, false);
                 }
             })
             .catch(err => console.log(err));
     }
 
+    submitLanguagePreference(lang: SupportedLang) {
+        axios.post(SERVER_BASE_NAME + "/api/changeLang",
+            {lang: lang},
+            {headers: {"Content-Type": "application/json"}}
+        );
+    };
+
     render(): ReactNode {
 
         return (
             <UserContext.Provider value={this.state.userContext}>
-                <LocaleContext.Provider value={this.state.localeContext}>
                     <Router basename={SERVER_BASE_NAME}>
                         <Route exact={true} path={"/"}>
                             <KadiPage activePage={PageId.home}>
@@ -90,7 +105,6 @@ class App extends React.Component<AppProps, AppState> {
                             />
                         </Route>
                     </Router>
-                </LocaleContext.Provider>
             </UserContext.Provider>
         );
     }

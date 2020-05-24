@@ -1,6 +1,6 @@
 import React, {ReactElement} from "react";
-import KadiPage from "../Components/KadiPage";
 import {Header} from "semantic-ui-react";
+import UserContext from "../Contexts/UserContext";
 
 interface ProfilePageProps {}
 
@@ -16,12 +16,14 @@ class ProfilePage extends React.Component<ProfilePageProps, ProfilePageState> {
     }
 
     render(): ReactElement {
+        const Locale = this.context.strings;
         return (
-            <Header>
-                My Profile
+            <Header size={"huge"}>
+                {Locale.profilePage.title}
             </Header>
         );
     }
 }
+ProfilePage.contextType = UserContext;
 
 export default ProfilePage;

@@ -1,6 +1,6 @@
 import React, {ReactElement} from "react";
-import KadiPage from "../Components/KadiPage";
 import {Header} from "semantic-ui-react";
+import UserContext from "../Contexts/UserContext";
 
 interface HomePageProps {}
 
@@ -16,12 +16,14 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     }
 
     render(): ReactElement {
+        const Locale = this.context.strings;
         return (
             <Header>
-                Home
+                {Locale.homePage.title}
             </Header>
         );
     }
 }
+HomePage.contextType = UserContext;
 
 export default HomePage;

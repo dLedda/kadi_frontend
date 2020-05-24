@@ -2,6 +2,7 @@ import React, {ReactElement} from "react";
 import {Header, List, ListItem} from "semantic-ui-react";
 import axios from "axios";
 import {SERVER_BASE_NAME} from "../index";
+import UserContext from "../Contexts/UserContext";
 
 interface HistoryPageProps {
 }
@@ -22,10 +23,11 @@ class HistoryPage extends React.Component<HistoryPageProps, HistoryPageState> {
     }
 
     componentDidMount(): void {
-        axios.get(SERVER_BASE_NAME + "/api/games/")
+        axios.get(SERVER_BASE_NAME + "/api/games")
             .then(response => this.setState({gameListings: response.data.games}))
             .catch(error => this.handleError(error))
             .finally(() => this.setState({ loadingGames: false }));
+        console.log(this.state.gameListings);
     }
 
     handleError = (error: any) => void {
@@ -33,21 +35,32 @@ class HistoryPage extends React.Component<HistoryPageProps, HistoryPageState> {
     };
 
     render(): ReactElement {
+        const Locale = this.context.strings;
         return (
             <>
                 <Header size={"huge"}>
-                    History
+                    {Locale.historyPage.title}
                 </Header>
-                <List bulleted={true}>
-                    {
-                        this.state.gameListings.map(listing => {
-                            return <ListItem key={listing.createdAt}>Game played on: {listing.createdAt}</ListItem>;
-                        })
-                    }
-                </List>
+                {
+                    this.state.loadingGames ? (
+                        <p>
+                            Loading games...
+                        </p>
+                    ) :
+                    (
+                        <List bulleted={true}>
+                            {
+                                this.state.gameListings.map(listing => {
+                                    return <ListItem key={listing.createdAt}>Game played on: {listing.createdAt}</ListItem>;
+                                })
+                            }
+                        </List>
+                    )
+                }
             </>
         );
     }
 }
+HistoryPage.contextType = UserContext;
 
 export default HistoryPage;

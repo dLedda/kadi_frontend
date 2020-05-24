@@ -4,6 +4,7 @@ import "../static/css/site.css";
 import KadiSidebarNav from "../Components/KadiSidebarNav";
 import MainPageContent from "../Components/MainPageContent";
 import {PageId} from "../enums";
+import UserContext from "../Contexts/UserContext";
 
 interface KadiPageProps {
     activePage: PageId;
@@ -32,5 +33,6 @@ class KadiPage extends React.Component<KadiPageProps, KadiPageState> {
         );
     }
 }
+KadiPage.contextType = UserContext;
 
 export default KadiPage;

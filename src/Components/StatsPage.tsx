@@ -1,7 +1,6 @@
 import React, {ReactNode} from "react";
-import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 import {Header} from "semantic-ui-react";
-import KadiPage from "../Components/KadiPage";
+import UserContext from "../Contexts/UserContext";
 
 interface StatsPageProps {}
 
@@ -17,12 +16,14 @@ class StatsPage extends React.Component<StatsPageProps, StatsPageState> {
     }
 
     render(): ReactNode {
+        const Locale = this.context.strings;
         return (
             <Header>
-                My Stats
+                {Locale.statsPage.title}
             </Header>
         );
     }
 }
+StatsPage.contextType = UserContext;
 
 export default StatsPage;
