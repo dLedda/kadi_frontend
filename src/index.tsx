@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 import "semantic-ui-css/semantic.min.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
-export const SERVER_BASE_NAME = "/kadi";
+export {homepage as SERVER_BASE_NAME} from "../package.json";
 
 ReactDOM.render((
     <React.StrictMode>

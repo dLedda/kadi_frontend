@@ -28,6 +28,9 @@ export const LanguageNames: Record<SupportedLang, string> = {
 
 export const IntlStrings = {
     gb: {
+        general: {
+            deleteCommand: "Delete",
+        },
         menu: {
             profileTab: "Profile",
             statsTab: "Stats",
@@ -44,6 +47,8 @@ export const IntlStrings = {
         },
         profilePage: {
             title: "Profile",
+            guestsHeader: "Guests",
+            loadingGuests: "Loading guests..."
         },
         statsPage: {
             title: "Stats",
@@ -56,9 +61,13 @@ export const IntlStrings = {
         },
         historyPage: {
             title: "History",
+            loading: "Loading games...",
         },
     },
     de: {
+        general: {
+            deleteCommand: "Löschen",
+        },
         menu: {
             profileTab: "Profil",
             statsTab: "Statistiken",
@@ -75,6 +84,8 @@ export const IntlStrings = {
         },
         profilePage: {
             title: "Profil",
+            guestsHeader: "Gäste",
+            loadingGuests: "Gäste werden geladen...",
         },
         statsPage: {
             title: "Statistiken",
@@ -87,9 +98,13 @@ export const IntlStrings = {
         },
         historyPage: {
             title: "Spielverlauf",
+            loading: "Spielverlauf wird geladen...",
         },
     },
     it: {
+        general: {
+            deleteCommand: "Cancella",
+        },
         menu: {
             profileTab: "Profilo",
             statsTab: "Statistiche",
@@ -106,6 +121,8 @@ export const IntlStrings = {
         },
         profilePage: {
             title: "Profilo",
+            guestsHeader: "===TRANSLATE ME===",
+            loadingGuests: "===TRANSLATE ME===",
         },
         statsPage: {
             title: "Statistiche",
@@ -118,6 +135,7 @@ export const IntlStrings = {
         },
         historyPage: {
             title: "Storia",
+            loading: "Caricando storia giochi..."
         },
     },
 } as const;

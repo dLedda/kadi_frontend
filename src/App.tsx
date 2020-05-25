@@ -1,8 +1,8 @@
 import React, {ReactNode} from "react";
-import {BrowserRouter as Router, Link, Route} from "react-router-dom";
-import {Redirect, Switch} from "react-router";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import {Redirect} from "react-router";
 import {IntlStrings} from "./static/strings";
-import {PageId, SupportedLang} from "./enums";
+import {PageId, SupportedLang, supportedLangToIntlDTF} from "./enums";
 import {pageComponentFromId} from "./pageListings";
 import KadiPage from "./Components/KadiPage";
 import HomePage from "./Components/HomePage";
@@ -27,6 +27,7 @@ class App extends React.Component<AppProps, AppState> {
                 username: username,
                 loggedIn: loggedIn,
                 updateUserContext: this.updateUserContext,
+                dateTimeFormatter: this.state.userContext.dateTimeFormatter,
                 currentLang: this.state.userContext.currentLang,
                 strings: this.state.userContext.strings,
                 changeLang: this.state.userContext.changeLang,
@@ -35,6 +36,7 @@ class App extends React.Component<AppProps, AppState> {
 
         this.changeLang = (lang: SupportedLang, submit=true) => {
             this.setState({userContext: {
+                dateTimeFormatter: supportedLangToIntlDTF[lang],
                 strings: IntlStrings[lang],
                 currentLang: lang,
                 changeLang: this.changeLang,
@@ -52,6 +54,7 @@ class App extends React.Component<AppProps, AppState> {
                 username: "",
                 loggedIn: false,
                 updateUserContext: this.updateUserContext,
+                dateTimeFormatter: supportedLangToIntlDTF[SupportedLang.gb],
                 currentLang: SupportedLang.gb,
                 strings: IntlStrings[SupportedLang.gb],
                 changeLang: this.changeLang,
@@ -76,7 +79,7 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     submitLanguagePreference(lang: SupportedLang) {
-        axios.post(SERVER_BASE_NAME + "/api/changeLang",
+        axios.put(SERVER_BASE_NAME + "/api/lang",
             {lang: lang},
             {headers: {"Content-Type": "application/json"}}
         );

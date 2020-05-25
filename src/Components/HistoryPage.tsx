@@ -3,6 +3,7 @@ import {Header, List, ListItem} from "semantic-ui-react";
 import axios from "axios";
 import {SERVER_BASE_NAME} from "../index";
 import UserContext from "../Contexts/UserContext";
+import GamesList from "./GamesList";
 
 interface HistoryPageProps {
 }
@@ -27,11 +28,9 @@ class HistoryPage extends React.Component<HistoryPageProps, HistoryPageState> {
             .then(response => this.setState({gameListings: response.data.games}))
             .catch(error => this.handleError(error))
             .finally(() => this.setState({ loadingGames: false }));
-        console.log(this.state.gameListings);
     }
 
     handleError = (error: any) => void {
-
     };
 
     render(): ReactElement {
@@ -41,22 +40,10 @@ class HistoryPage extends React.Component<HistoryPageProps, HistoryPageState> {
                 <Header size={"huge"}>
                     {Locale.historyPage.title}
                 </Header>
-                {
-                    this.state.loadingGames ? (
-                        <p>
-                            Loading games...
-                        </p>
-                    ) :
-                    (
-                        <List bulleted={true}>
-                            {
-                                this.state.gameListings.map(listing => {
-                                    return <ListItem key={listing.createdAt}>Game played on: {listing.createdAt}</ListItem>;
-                                })
-                            }
-                        </List>
-                    )
-                }
+                <GamesList
+                    loading={this.state.loadingGames}
+                    gamesList={this.state.gameListings}
+                />
             </>
         );
     }
